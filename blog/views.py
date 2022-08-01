@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 from .models import Post, Category, Tag
 
 class PostList(ListView):
@@ -73,24 +74,14 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         else:
             return redirect('/blog/')
 
-# def index(request):
-#     posts = Post.objects.all().order_by('-pk')
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category', 'tags']
 
-#     return render(
-#         request,
-#         'blog/index.html',
-#         {
-#             'posts': posts,
-#         }
-#      )
+    template_name = 'blog/post_update_form.html'
 
-# def single_post_page(request, pk):
-#     post = Post.objects.get(pk=pk)
-
-#     return render(
-#         request,
-#         'blog/single_post_page.html',
-#         {
-#             'post': post,
-#         }
-#     )
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
