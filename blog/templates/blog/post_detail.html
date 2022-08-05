@@ -96,9 +96,16 @@
                         <img class="flex-shrink-0 rounded-circle" src="https://picsum.photos/seed/{{ comment.author.id }}/50/50" alt="">
                     </div>
                     <div class="flex-grow-1 ms-3">
+                        {% if user.is_authenticated and comment.author == user %}
+                            <a role="button" class="btn btn-sm btn-info float-end" id="comment-{{ comment.pk }}-update-btn"
+                            href="/blog/update_comment/{{ comment.pk }}/">edit</a>
+                        {% endif %}
                         <h5 class="mt-0">{{ comment.author.username }} &nbsp;&nbsp;<small class="text-muted">{{ comment.created_at }}</small>
                         </h5>
                         <p>{{ comment.content | linebreaks }}</p>
+                        {% if comment.get_delta_time %}
+                            <p class="text-muted float-end"><small>Updated: {{ comment.modified_at }}</small></p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
