@@ -34,10 +34,10 @@ class PostDetail(DetailView):
 def category_page(request, slug):
     if slug == 'no_category':
         category = '미분류'
-        post_list = Post.objects.filter(category=None)
+        post_list = Post.objects.filter(category=None).order_by('-pk')
     else:
         category = Category.objects.get(slug=slug)
-        post_list = Post.objects.filter(category=category)
+        post_list = Post.objects.filter(category=category).order_by('-pk')
 
     return render(
         request,
