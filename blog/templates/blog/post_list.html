@@ -4,7 +4,7 @@
 
     {% if user.is_authenticated %}
         {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-primary btn-sm float-end" href="/blog/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
+            <a class="btn btn-sm float-end" style="background-color: #99cfe0;" href="/blog/create_post/" role="button"><i class="fas fa-pen"></i>&nbsp;&nbsp;New Post</a>
         {% endif %}
     {% endif %}
 
@@ -22,10 +22,6 @@
                 <a href="{{ p.get_absolute_url }}">
                     <img class="card-img-top" src="{{ p.head_image.url }}"
                     alt="{{ p.title }} head_image">
-                </a>
-            {% else %}
-                <a href="{{ p.get_absolute_url }}">
-                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random_image">
                 </a>
             {% endif %}
             <div class="card-body">
@@ -47,11 +43,11 @@
                     <br/><br/>
                 {% endif %}
 
-                <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read more →</a>
+                <a href="{{ p.get_absolute_url }}" class="btn" style="background-color: #99cfe0;">Read more →</a>
             </div>
             <div class="card-footer text-muted">
                 Posted on {{ p.created_at }} by
-                <a href="#">{{ p.author | upper }}</a>
+                <a href="#" style="text-decoration:none">{{ p.author | upper }}</a>
             </div>
         </div>
         {% endfor %}
