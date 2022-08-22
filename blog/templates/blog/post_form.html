@@ -9,10 +9,10 @@
 	<form method="post" enctype="multipart/form-data">{% csrf_token %}
 		{{ form | crispy }}
 		<div id="div_id_tags_str">
-			<label for="id_tags_str">Tags:</label>
+			<label for="id_tags_str">Tags</label>
 			<input type="text" name="tags_str" id="id_tags_str" class="textinput textInput form-control">
 		</div>
 		<br/>
-		<button type="submit" class="btn btn-primary float-end">Submit</button>
+		<button type="submit" class="btn float-end" style="background-color: #99cfe0;">Submit</button>
 	</form>
 {% endblock %}
