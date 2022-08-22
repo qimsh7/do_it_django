@@ -30,10 +30,11 @@
                 {% else %}
                     <span class="badge text-bg-light float-end">미분류</span>
                 {% endif %}
-                <h2 class="card-title">{{ p.title }}</h2>
+                <h2 class="card-title"><a href="{{ p.get_absolute_url }}" style="text-decoration:none; color:black ">{{ p.title }}</a></h2>
                 {% if p.hook_text %}
                     <h5 class="text-muted">{{ p.hook_text }}</h5>
                 {% endif %}
+                <hr/>
                 <p class="card-text">{{ p.content | truncatewords:45 }}</p>
                 {% if p.tags.exists %}
                     <i class="fas fa-tags"></i>
