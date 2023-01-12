@@ -1,2 +1,2 @@
 # do_it_django
-&lt;do it! 장고+부트스트랩> 실습
+&lt;do it! Django + Bootstrap> 실습
